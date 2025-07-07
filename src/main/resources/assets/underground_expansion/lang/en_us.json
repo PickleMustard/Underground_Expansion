@@ -1,0 +1,15 @@
+{
+  "itemGroup.underground_expansion": "Example Mod Tab",
+  "block.underground_expansion.example_block": "Example Block",
+  "block.underground_expansion.inverse_sand": "Inverse Sand",
+  "item.underground_expansion.test_item": "Example Item",
+  "item.underground_expansion.second_test_item": "Example Item 2",
+
+  "underground_expansion.configuration.title": "Underground Expansion Configs",
+  "underground_expansion.configuration.section.underground_expansion.common.toml": "Underground Expansion Configs",
+  "underground_expansion.configuration.section.underground_expansion.common.toml.title": "Underground Expansion Configs",
+  "underground_expansion.configuration.items": "Item List",
+  "underground_expansion.configuration.logDirtBlock": "Log Dirt Block",
+  "underground_expansion.configuration.magicNumberIntroduction": "Magic Number Text",
+  "underground_expansion.configuration.magicNumber": "Magic Number"
+}
