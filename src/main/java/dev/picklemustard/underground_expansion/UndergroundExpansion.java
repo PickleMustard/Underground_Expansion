@@ -31,6 +31,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import dev.picklemustard.underground_expansion.blocks.*;
+import dev.picklemustard.underground_expansion.entity.ModEntities;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(UndergroundExpansion.MODID)
@@ -41,8 +42,6 @@ public class UndergroundExpansion {
     public static final Logger LOGGER = LogUtils.getLogger();
     // Create a Deferred Register to hold Blocks which will all be registered under the "underground_expansion" namespace
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
-    // Create a Deferred Register to hold Items which will all be registered under the "underground_expansion" namespace
-    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
     // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "underground_expansion" namespace
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
@@ -52,10 +51,6 @@ public class UndergroundExpansion {
     public static final DeferredItem<BlockItem> EXAMPLE_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("example_block", EXAMPLE_BLOCK);
 
     // Creates a new food item with the id "underground_expansion:example_id", nutrition 1 and saturation 2
-    public static final DeferredItem<Item> TEST_ITEM = ITEMS.registerSimpleItem("test_item", new Item.Properties().food(new FoodProperties.Builder()
-            .alwaysEdible().nutrition(1).saturationModifier(2f).build()));
-
-    public static final DeferredItem<Item> SECOND_TEST_ITEM = ITEMS.registerSimpleItem("second_test_item", new Item.Properties().stacksTo(49));
 
     // Creates a creative tab with the id "underground_expansion:example_tab" for the example item, that is placed after the combat tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
@@ -80,6 +75,7 @@ public class UndergroundExpansion {
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModEntities.register(modEventBus);
 
 
         // Register ourselves for server and other game events we are interested in.

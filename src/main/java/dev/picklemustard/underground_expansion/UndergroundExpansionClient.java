@@ -1,6 +1,9 @@
 package dev.picklemustard.underground_expansion;
 
+import dev.picklemustard.underground_expansion.entity.ModEntities;
+import dev.picklemustard.underground_expansion.entity.client.renderer.RisingBlockRenderer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -27,5 +30,6 @@ public class UndergroundExpansionClient {
         // Some client setup code
         UndergroundExpansion.LOGGER.info("HELLO FROM CLIENT SETUP");
         UndergroundExpansion.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+        EntityRenderers.register(ModEntities.RISING_BLOCK.get(), RisingBlockRenderer::new);
     }
 }
