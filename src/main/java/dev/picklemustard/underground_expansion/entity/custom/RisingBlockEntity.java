@@ -1,6 +1,5 @@
 package dev.picklemustard.underground_expansion.entity.custom;
 
-
 import javax.annotation.Nullable;
 
 import com.mojang.logging.LogUtils;
@@ -44,7 +43,8 @@ import dev.picklemustard.underground_expansion.entity.ModEntities;
  * @author picklemustard
  * @version v1.0.0
  * @category Entity
- * {@summary A Rising Block Entity that behaves like a falling block entity but inverses the fall direction.}
+ *           {@summary A Rising Block Entity that behaves like a falling block
+ *           entity but inverses the fall direction.}
  *
  */
 public class RisingBlockEntity extends Entity {
@@ -59,7 +59,9 @@ public class RisingBlockEntity extends Entity {
     @Nullable
     public CompoundTag blockData;
     public boolean forceTickAfterTeleportToDuplicate;
-    protected static EntityDataAccessor<BlockPos> DATA_START_POS = SynchedEntityData.defineId(RisingBlockEntity.class, EntityDataSerializers.BLOCK_POS);
+    protected static EntityDataAccessor<BlockPos> DATA_START_POS = SynchedEntityData.defineId(RisingBlockEntity.class,
+            EntityDataSerializers.BLOCK_POS);
+
     public RisingBlockEntity(EntityType<? extends RisingBlockEntity> entityType, Level level) {
         super(entityType, level);
     }
@@ -76,12 +78,11 @@ public class RisingBlockEntity extends Entity {
         this.setStartPos(this.blockPosition());
     }
 
-
     private void setStartPos(BlockPos blockPosition) {
         this.entityData.set(DATA_START_POS, blockPosition);
     }
 
-    public BlockState getBlockState(){
+    public BlockState getBlockState() {
         return this.blockState;
     }
 
@@ -90,29 +91,34 @@ public class RisingBlockEntity extends Entity {
     }
 
     /**
-     * {@summary Ran when the block calculates it should start falling. Replaces the block with a RisingBlockEntity}
+     * {@summary Ran when the block calculates it should start falling. Replaces the
+     * block with a RisingBlockEntity}
      *
      *
-     * @param level Level
-     * @param pos {@linkplain BlockPos}
+     * @param level      Level
+     * @param pos        {@linkplain BlockPos}
      * @param blockState {@linkplain BlockState}
      * @return {@linkplain RisingBlockEntity}
      */
     public static RisingBlockEntity rise(Level level, BlockPos pos, BlockState blockState) {
-        RisingBlockEntity rbe = new RisingBlockEntity(level, (double)pos.getX() + 0.5, (double)pos.getY(), (double)pos.getZ() + 0.5, blockState.hasProperty(BlockStateProperties.WATERLOGGED) ? blockState.setValue(BlockStateProperties.WATERLOGGED, Boolean.valueOf(false)) : blockState);
+        RisingBlockEntity rbe = new RisingBlockEntity(level, (double) pos.getX() + 0.5, (double) pos.getY(),
+                (double) pos.getZ() + 0.5,
+                blockState.hasProperty(BlockStateProperties.WATERLOGGED)
+                        ? blockState.setValue(BlockStateProperties.WATERLOGGED, Boolean.valueOf(false))
+                        : blockState);
         level.setBlock(pos, blockState.getFluidState().createLegacyBlock(), 3);
         level.addFreshEntity(rbe);
         return rbe;
     }
 
     @Override
-    protected double getDefaultGravity(){
+    protected double getDefaultGravity() {
         return -0.04;
     }
 
     @Override
     public void tick() {
-        if(this.blockState.isAir()) {
+        if (this.blockState.isAir()) {
             this.discard();
         } else {
             Block block = this.blockState.getBlock();
@@ -123,16 +129,18 @@ public class RisingBlockEntity extends Entity {
             if (!this.level().isClientSide && (this.isAlive() || this.forceTickAfterTeleportToDuplicate)) {
                 BlockPos blockpos = this.blockPosition();
                 boolean flag = this.blockState.getBlock() instanceof ConcretePowderBlock;
-                boolean flag1 = flag && this.blockState.canBeHydrated(this.level(), blockpos, this.level().getFluidState(blockpos), blockpos);
+                boolean flag1 = flag && this.blockState.canBeHydrated(this.level(), blockpos,
+                        this.level().getFluidState(blockpos), blockpos);
                 double d0 = this.getDeltaMovement().lengthSqr();
                 if (flag && d0 > 1.0) {
                     BlockHitResult blockhitresult = this.level()
-                        .clip(
-                            new ClipContext(
-                                new Vec3(this.xo, this.yo, this.zo), this.position(), ClipContext.Block.COLLIDER, ClipContext.Fluid.SOURCE_ONLY, this
-                            )
-                        );
-                    if (blockhitresult.getType() != HitResult.Type.MISS && this.blockState.canBeHydrated(this.level(), blockpos, this.level().getFluidState(blockhitresult.getBlockPos()), blockhitresult.getBlockPos())) {
+                            .clip(
+                                    new ClipContext(
+                                            new Vec3(this.xo, this.yo, this.zo), this.position(),
+                                            ClipContext.Block.COLLIDER, ClipContext.Fluid.SOURCE_ONLY, this));
+                    if (blockhitresult.getType() != HitResult.Type.MISS && this.blockState.canBeHydrated(this.level(),
+                            blockpos, this.level().getFluidState(blockhitresult.getBlockPos()),
+                            blockhitresult.getBlockPos())) {
                         blockpos = blockhitresult.getBlockPos();
                         flag1 = true;
                     }
@@ -144,52 +152,60 @@ public class RisingBlockEntity extends Entity {
                     if (!blockstate.is(Blocks.MOVING_PISTON)) {
                         if (!this.cancelDrop) {
                             boolean flag2 = blockstate.canBeReplaced(
-                                new DirectionalPlaceContext(this.level(), blockpos, Direction.DOWN, ItemStack.EMPTY, Direction.UP)
-                            );
-                            boolean flag3 = FallingBlock.isFree(this.level().getBlockState(blockpos.below())) && (!flag || !flag1);
+                                    new DirectionalPlaceContext(this.level(), blockpos, Direction.DOWN, ItemStack.EMPTY,
+                                            Direction.UP));
+                            boolean flag3 = FallingBlock.isFree(this.level().getBlockState(blockpos.below()))
+                                    && (!flag || !flag1);
                             boolean flag4 = this.blockState.canSurvive(this.level(), blockpos) && !flag3;
                             if (flag2 && flag4) {
                                 if (this.blockState.hasProperty(BlockStateProperties.WATERLOGGED)
-                                    && this.level().getFluidState(blockpos).getType() == Fluids.WATER) {
-                                    this.blockState = this.blockState.setValue(BlockStateProperties.WATERLOGGED, Boolean.valueOf(true));
+                                        && this.level().getFluidState(blockpos).getType() == Fluids.WATER) {
+                                    this.blockState = this.blockState.setValue(BlockStateProperties.WATERLOGGED,
+                                            Boolean.valueOf(true));
                                 }
 
                                 if (this.level().setBlock(blockpos, this.blockState, 3)) {
-                                    ((ServerLevel)this.level())
-                                        .getChunkSource()
-                                        .chunkMap
-                                        .broadcast(this, new ClientboundBlockUpdatePacket(blockpos, this.level().getBlockState(blockpos)));
+                                    ((ServerLevel) this.level())
+                                            .getChunkSource().chunkMap
+                                            .broadcast(this, new ClientboundBlockUpdatePacket(blockpos,
+                                                    this.level().getBlockState(blockpos)));
                                     this.discard();
                                     if (block instanceof Risable) {
-                                        ((Risable)block).onLand(this.level(), blockpos, this.blockState, blockstate, this);
+                                        ((Risable) block).onLand(this.level(), blockpos, this.blockState, blockstate,
+                                                this);
                                     }
 
                                     if (this.blockData != null && this.blockState.hasBlockEntity()) {
                                         BlockEntity blockentity = this.level().getBlockEntity(blockpos);
                                         if (blockentity != null) {
-                                            CompoundTag compoundtag = blockentity.saveWithoutMetadata(this.level().registryAccess());
+                                            CompoundTag compoundtag = blockentity
+                                                    .saveWithoutMetadata(this.level().registryAccess());
 
                                             for (String s : this.blockData.getAllKeys()) {
                                                 compoundtag.put(s, this.blockData.get(s).copy());
                                             }
 
                                             try {
-                                                blockentity.loadWithComponents(compoundtag, this.level().registryAccess());
+                                                blockentity.loadWithComponents(compoundtag,
+                                                        this.level().registryAccess());
                                             } catch (Exception exception) {
-                                                LOGGER.error("Failed to load block entity from falling block", (Throwable)exception);
+                                                LOGGER.error("Failed to load block entity from falling block",
+                                                        (Throwable) exception);
                                             }
 
                                             blockentity.setChanged();
                                         }
                                     }
-                                } else if (this.dropItem && this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+                                } else if (this.dropItem
+                                        && this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
                                     this.discard();
                                     this.callOnBrokenAfterFall(block, blockpos);
                                     this.spawnAtLocation(block);
                                 }
                             } else {
                                 this.discard();
-                                if (this.dropItem && this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+                                if (this.dropItem
+                                        && this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
                                     this.callOnBrokenAfterFall(block, blockpos);
                                     this.spawnAtLocation(block);
                                 }
@@ -200,10 +216,10 @@ public class RisingBlockEntity extends Entity {
                         }
                     }
                 } else if (!this.level().isClientSide
-                    && (
-                        this.time > 100 && (blockpos.getY() <= this.level().getMinBuildHeight() || blockpos.getY() > this.level().getMaxBuildHeight())
-                            || this.time > 600
-                    )) {
+                        && (this.time > 100
+                                && (blockpos.getY() <= this.level().getMinBuildHeight()
+                                        || blockpos.getY() > this.level().getMaxBuildHeight())
+                                || this.time > 600)) {
                     if (this.dropItem && this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
                         this.spawnAtLocation(block);
                     }
@@ -218,8 +234,8 @@ public class RisingBlockEntity extends Entity {
     }
 
     private void callOnBrokenAfterFall(Block block, BlockPos blockpos) {
-        if(block instanceof Risable) {
-            ((Risable)block).onBrokenAfterFall(this.level(), blockpos, this);
+        if (block instanceof Risable) {
+            ((Risable) block).onBrokenAfterFall(this.level(), blockpos, this);
         }
     }
 
@@ -227,7 +243,8 @@ public class RisingBlockEntity extends Entity {
      * [TODO:description]
      *
      * @param builder [TODO:parameter]
-     * @throws throw new UnsupportedOperationException("Unimplemented method 'defineSynchedData'"); [TODO:throw]
+     * @throws throw new UnsupportedOperationException("Unimplemented method
+     *               'defineSynchedData'"); [TODO:throw]
      */
     @Override
     protected void defineSynchedData(Builder builder) {
@@ -251,7 +268,8 @@ public class RisingBlockEntity extends Entity {
 
     @Override
     protected void addAdditionalSaveData(CompoundTag compound) {
-this.blockState = NbtUtils.readBlockState(this.level().holderLookup(Registries.BLOCK), compound.getCompound("BlockState"));
+        this.blockState = NbtUtils.readBlockState(this.level().holderLookup(Registries.BLOCK),
+                compound.getCompound("BlockState"));
         this.time = compound.getInt("Time");
         if (compound.contains("HurtEntities", 99)) {
             this.hurtEntities = compound.getBoolean("HurtEntities");

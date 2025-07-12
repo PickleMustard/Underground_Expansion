@@ -5,8 +5,6 @@ import java.util.function.Supplier;
 import dev.picklemustard.underground_expansion.UndergroundExpansion;
 import dev.picklemustard.underground_expansion.entity.custom.RisingBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.neoforged.bus.api.IEventBus;

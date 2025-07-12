@@ -1,9 +1,14 @@
 package dev.picklemustard.underground_expansion;
 
+import com.google.common.collect.ImmutableList;
+
+import dev.picklemustard.underground_expansion.blocks.ModBlocks;
 import dev.picklemustard.underground_expansion.entity.ModEntities;
 import dev.picklemustard.underground_expansion.entity.client.renderer.RisingBlockRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -15,13 +20,16 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = UndergroundExpansion.MODID, dist = Dist.CLIENT)
-// You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
+// You can use EventBusSubscriber to automatically register all static methods
+// in the class annotated with @SubscribeEvent
 @EventBusSubscriber(modid = UndergroundExpansion.MODID, value = Dist.CLIENT)
 public class UndergroundExpansionClient {
     public UndergroundExpansionClient(ModContainer container) {
         // Allows NeoForge to create a config screen for this mod's configs.
-        // The config screen is accessed by going to the Mods screen > clicking on your mod > clicking on config.
-        // Do not forget to add translations for your config options to the en_us.json file.
+        // The config screen is accessed by going to the Mods screen > clicking on your
+        // mod > clicking on config.
+        // Do not forget to add translations for your config options to the en_us.json
+        // file.
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
     }
 
@@ -31,5 +39,11 @@ public class UndergroundExpansionClient {
         UndergroundExpansion.LOGGER.info("HELLO FROM CLIENT SETUP");
         UndergroundExpansion.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         EntityRenderers.register(ModEntities.RISING_BLOCK.get(), RisingBlockRenderer::new);
+        UndergroundExpansion.LOGGER.info(BuiltInRegistries.BLOCK.getKey(ModBlocks.INVERSE_SAND_BLOCK.get()).toString());
+        ImmutableList<BlockState> states = ModBlocks.INVERSE_SAND_BLOCK.get().getStateDefinition().getPossibleStates();
+        for (BlockState blockState : states) {
+            UndergroundExpansion.LOGGER.info("Possible States: {}", blockState);
+        }
+
     }
 }
