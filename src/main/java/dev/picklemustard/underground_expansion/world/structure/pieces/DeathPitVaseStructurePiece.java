@@ -20,12 +20,14 @@ import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
 public class DeathPitVaseStructurePiece extends StructurePiece {
 
     public DeathPitVaseStructurePiece(BlockPos chunkCorner, BlockPos holeCenter, int height, int radius) {
-        super(ModPieces.DEATH_PIT_VASE_SP.get(), 0, createBoundingBox(chunkCorner, chunkCorner.getY()-50, chunkCorner.getY() + 50));
+        super(ModPieces.DEATH_PIT_VASE_SP.get(), 0,
+                createBoundingBox(chunkCorner, chunkCorner.getY() - 50, chunkCorner.getY() + 50));
     }
 
     private static BoundingBox createBoundingBox(BlockPos center, int minY, int maxY) {
         ChunkPos corner = new ChunkPos(center);
-        return new BoundingBox(corner.getMinBlockX(), minY, corner.getMinBlockZ(), corner.getMaxBlockX(), maxY, corner.getMaxBlockZ());
+        return new BoundingBox(corner.getMinBlockX(), minY, corner.getMinBlockZ(), corner.getMaxBlockX(), maxY,
+                corner.getMaxBlockZ());
     }
 
     public DeathPitVaseStructurePiece(CompoundTag tag) {
@@ -44,15 +46,18 @@ public class DeathPitVaseStructurePiece extends StructurePiece {
     public void postProcess(WorldGenLevel level, StructureManager structureManager, ChunkGenerator generator,
             RandomSource random, BoundingBox box, ChunkPos chunkPos, BlockPos pos) {
         LogUtils.getLogger().info("BlockPos (x,y,z): ({}, {}, {})", pos.getX(), pos.getY(), pos.getZ());
-        for(int x = 0; x < 16; x++) {
-            for(int y = 0; y < 200; y++) {
-                for(int z = 0; z < 16; z++ ) {
-                    if((x % 3) + (y % 3) + (z % 3) < 5) {
-                        level.setBlock(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z), Blocks.AIR.defaultBlockState(), 128);
-                        //checkedSetBlock(level, new BlockPos(x, y, z), Blocks.CAVE_AIR.defaultBlockState());
-                    } else {
-                        level.setBlock(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z), ModBlocks.SEPUCHRAL_STONE_BLOCK.get().defaultBlockState(), 128);
-                        //checkedSetBlock(level, new BlockPos(x, y, z), ModBlocks.SEPUCHRAL_STONE_BLOCK.get().defaultBlockState());
+        int radius = random.nextInt(5, 12);
+        for (int y = 16; y > 0; y--) {
+            for (int x = -radius / 2; x <= radius / 2; x++) {
+                for (int z = -radius / 2; z <= radius / 2; z++) {
+                    int location = (x * x) + (z * z);
+                    if (location <= (radius * radius)) {
+                        if (location <= 1)
+                            level.setBlock(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z),
+                                    ModBlocks.SEPUCHRAL_STONE_BLOCK.get().defaultBlockState(), 128);
+                        else
+                            level.setBlock(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z),
+                                    Blocks.AIR.defaultBlockState(), 128);
                     }
                 }
             }
@@ -61,10 +66,9 @@ public class DeathPitVaseStructurePiece extends StructurePiece {
     }
 
     public void checkedSetBlock(WorldGenLevel level, BlockPos pos, BlockState state) {
-        if(this.getBoundingBox().isInside(pos)){
+        if (this.getBoundingBox().isInside(pos)) {
             level.setBlock(pos, state, 128);
         }
     }
-
 
 }

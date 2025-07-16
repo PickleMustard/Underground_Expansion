@@ -3,23 +3,17 @@ package dev.picklemustard.underground_expansion.world.structure.structures;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import dev.picklemustard.underground_expansion.world.structure.ModStructures;
 import dev.picklemustard.underground_expansion.world.structure.pieces.DeathPitVaseStructurePiece;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.HolderSet;
-import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
-import net.minecraft.world.level.levelgen.structure.StructureSpawnOverride;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
@@ -70,7 +64,7 @@ public class DeathPitVase extends Structure {
 
     @Override
     protected Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
-        return determineStructure(context, Heightmap.Types.OCEAN_FLOOR_WG, (builder) -> {
+        return determineStructure(context, Heightmap.Types.WORLD_SURFACE_WG, (builder) -> {
             this.generatePieces(builder, context);
         });
 
