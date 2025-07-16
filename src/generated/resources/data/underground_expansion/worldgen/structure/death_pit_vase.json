@@ -1,0 +1,9 @@
+{
+    "type": "underground_expansion:death_pit_vase",
+    "biomes": "underground_expansion:death_pit",
+    "step": "raw_generation",
+    "start_height": {
+        "absolute": 0
+    },
+    "spawn_overrides": {}
+}

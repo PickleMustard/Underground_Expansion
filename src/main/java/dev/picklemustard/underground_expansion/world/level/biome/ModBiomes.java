@@ -1,0 +1,70 @@
+package dev.picklemustard.underground_expansion.world.level.biome;
+
+import javax.annotation.Nullable;
+
+import dev.picklemustard.underground_expansion.UndergroundExpansion;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BiomeDefaultFeatures;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.Music;
+import net.minecraft.sounds.Musics;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.biome.AmbientMoodSettings;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+
+public class ModBiomes {
+    public static final ResourceKey<Biome> DEATH_PIT = register("death_pit");
+
+    private static ResourceKey<Biome> register(String name) {
+        return ResourceKey.create(Registries.BIOME,
+                ResourceLocation.fromNamespaceAndPath(UndergroundExpansion.MODID, name));
+    }
+
+    private static Biome biome(boolean hasPrecipitation, float temp, float downfall, MobSpawnSettings.Builder mobSpawnSettings, BiomeGenerationSettings.Builder generationSettings, @Nullable Music bgm) {
+        return biome(hasPrecipitation, temp, downfall, 4159204, 329011, null, null, mobSpawnSettings, generationSettings, bgm);
+    }
+
+    private static Biome biome(boolean hasPrecipitation, float temperature, float downfall, int waterColor,
+            int waterFogColor, @Nullable Integer grassColorOverride, @Nullable Integer foliageColorOverride,
+            MobSpawnSettings.Builder mobSpawnSettings, BiomeGenerationSettings.Builder generationSettings,
+            @Nullable Music backgroundMusic) {
+        BiomeSpecialEffects.Builder biomespecialeffects$builder = new BiomeSpecialEffects.Builder()
+                .waterColor(waterColor).waterFogColor(waterFogColor).fogColor(12638463).skyColor(12638463)
+                .ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS).backgroundMusic(backgroundMusic);
+        if (grassColorOverride != null)
+            biomespecialeffects$builder.grassColorOverride(grassColorOverride);
+        if (foliageColorOverride != null)
+            biomespecialeffects$builder.foliageColorOverride(foliageColorOverride);
+
+        return new Biome.BiomeBuilder().hasPrecipitation(hasPrecipitation).temperature(temperature).downfall(downfall)
+                .specialEffects(biomespecialeffects$builder.build()).mobSpawnSettings(mobSpawnSettings.build())
+                .generationSettings(generationSettings.build()).build();
+    }
+
+    private static void globalOverworldGeneration(BiomeGenerationSettings.Builder generationSettings) {
+        BiomeDefaultFeatures.addDefaultCarversAndLakes(generationSettings);
+        BiomeDefaultFeatures.addDefaultCrystalFormations(generationSettings);
+        BiomeDefaultFeatures.addDefaultMonsterRoom(generationSettings);
+        BiomeDefaultFeatures.addDefaultUndergroundVariety(generationSettings);
+        BiomeDefaultFeatures.addDefaultSprings(generationSettings);
+        BiomeDefaultFeatures.addSurfaceFreezing(generationSettings);
+    }
+
+    public static Biome deathPit(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+        MobSpawnSettings.Builder mbs$builder = new MobSpawnSettings.Builder();
+        BiomeDefaultFeatures.commonSpawns(mbs$builder);
+        BiomeGenerationSettings.Builder bgs$builder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
+        BiomeDefaultFeatures.addBlueIce(bgs$builder);
+        Music bgm = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_BASALT_DELTAS);
+
+        return biome(true, 0.5f, 0.5f, mbs$builder, bgs$builder, bgm);
+    }
+
+}

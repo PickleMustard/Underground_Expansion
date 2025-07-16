@@ -30,8 +30,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        System.out.println("Testing?");
-        LogUtils.getLogger().debug("Is this working?");
         simpleBlockWithItem(ModBlocks.INVERSE_SAND_BLOCK.get(),
          cubeAll(ModBlocks.INVERSE_SAND_BLOCK.get()));
         simpleBlockWithItem(ModBlocks.SEPUCHRAL_STONE_BLOCK.get(), cubeAll(ModBlocks.SEPUCHRAL_STONE_BLOCK.get()));

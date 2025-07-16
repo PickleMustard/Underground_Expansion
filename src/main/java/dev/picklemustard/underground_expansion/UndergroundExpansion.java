@@ -8,6 +8,8 @@ import dev.picklemustard.underground_expansion.blocks.ModBlocks;
 import dev.picklemustard.underground_expansion.component.ModDataComponents;
 import dev.picklemustard.underground_expansion.entity.ModEntities;
 import dev.picklemustard.underground_expansion.item.ModItems;
+import dev.picklemustard.underground_expansion.world.structure.ModStructures;
+import dev.picklemustard.underground_expansion.world.structure.pieces.ModPieces;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.CreativeModeTab;
@@ -70,6 +72,8 @@ public class UndergroundExpansion {
         // Register the Deferred Register to the mod event bus so tabs get registered
         ModEntities.register(modEventBus);
         ModDataComponents.register(modEventBus);
+        ModStructures.register(modEventBus);
+        ModPieces.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
 
 
