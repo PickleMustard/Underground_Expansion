@@ -3,6 +3,7 @@ package dev.picklemustard.underground_expansion.world.structure.structures;
 import java.util.Optional;
 import java.util.function.Consumer;
 
+import com.mojang.logging.LogUtils;
 import com.mojang.serialization.MapCodec;
 
 import dev.picklemustard.underground_expansion.world.structure.ModStructures;
@@ -25,8 +26,6 @@ public class DeathPitVase extends Structure {
     private final HeightProvider startHeight;
     private final int maxDistanceFromCenter;
 
-
-
     // public static final MapCodec<StructureSettings> CODEC =
     // RecordCodecBuilder.mapCodec(instance -> instance.group(HolderSet.codec(),
     // Codec.simpleMap(MobCategory.CODEC, StructureSpawnOverride.CODEC,
@@ -34,16 +33,22 @@ public class DeathPitVase extends Structure {
     // StructureSettings::new));
     //
     //
-    ////public static final MapCodec<DeathPitVase> CODEC = RecordCodecBuilder.mapCodec(instance ->  instance.group(
-     //               StructureSettings.CODEC.fieldOf("settings").forGetter(structure -> structure.settings),
-     //               StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
-     //               Codec.intRange(0, 30).fieldOf("size").forGetter(structure -> structure.size),
-     //               HeightProvider.CODEC.fieldOf("start_height").forGetter(structure -> structure.startHeight),
-     //               Codec.intRange(1, 128).fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter)
-     //       ).apply(instance, DeathPitVase::new));
+    //// public static final MapCodec<DeathPitVase> CODEC =
+    // RecordCodecBuilder.mapCodec(instance -> instance.group(
+    // StructureSettings.CODEC.fieldOf("settings").forGetter(structure ->
+    // structure.settings),
+    // StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure ->
+    // structure.startPool),
+    // Codec.intRange(0, 30).fieldOf("size").forGetter(structure -> structure.size),
+    // HeightProvider.CODEC.fieldOf("start_height").forGetter(structure ->
+    // structure.startHeight),
+    // Codec.intRange(1,
+    // 128).fieldOf("max_distance_from_center").forGetter(structure ->
+    // structure.maxDistanceFromCenter)
+    // ).apply(instance, DeathPitVase::new));
     public static final MapCodec<DeathPitVase> CODEC = simpleCodec(DeathPitVase::new);
 
-    public DeathPitVase(StructureSettings settings, Holder<StructureTemplatePool> startPool,int size,
+    public DeathPitVase(StructureSettings settings, Holder<StructureTemplatePool> startPool, int size,
             HeightProvider startHeight, int maxDistanceFromCenter) {
         super(settings);
         this.size = size;
@@ -51,7 +56,6 @@ public class DeathPitVase extends Structure {
         this.startHeight = startHeight;
         this.maxDistanceFromCenter = maxDistanceFromCenter;
     }
-
 
     protected DeathPitVase(StructureSettings settings) {
         super(settings);
@@ -61,10 +65,9 @@ public class DeathPitVase extends Structure {
         maxDistanceFromCenter = 0;
     }
 
-
     @Override
     protected Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
-        return determineStructure(context, Heightmap.Types.WORLD_SURFACE_WG, (builder) -> {
+        return determineStructure(context, Heightmap.Types.OCEAN_FLOOR_WG, (builder) -> {
             this.generatePieces(builder, context);
         });
 
@@ -80,11 +83,23 @@ public class DeathPitVase extends Structure {
     }
 
     public void generatePieces(StructurePiecesBuilder builder, Structure.GenerationContext context) {
-        int widthBlocks = 5;
+        ChunkPos centerPiece = context.chunkPos();
+        int radius = context.random().nextInt(5, 10);
         int heightBlocks = 5;
-        BlockPos center = new BlockPos(context.chunkPos().getMinBlockX(), context.random().nextInt(30) - 25, context.chunkPos().getMinBlockZ());
-        StructurePiece piece = new DeathPitVaseStructurePiece(center, center, heightBlocks, widthBlocks);
-        builder.addPiece(piece);
+        BlockPos center = new BlockPos(centerPiece.getMinBlockX(),
+                context.chunkGenerator().getBaseHeight(centerPiece.getMinBlockX(),
+                        centerPiece.getMinBlockZ(), Heightmap.Types.WORLD_SURFACE_WG,
+                        context.heightAccessor(), context.randomState()),
+                // */ context.chunkGenerator().getSeaLevel() - context.random().nextInt(0, 20),
+                centerPiece.getMinBlockZ());
+        for (int xOffset = -1; xOffset <= 0; xOffset++) {
+            for (int zOffset = -1; zOffset <= 0; zOffset++) {
+                StructurePiece piece = new DeathPitVaseStructurePiece(
+                        center.offset(new BlockPos(16 * xOffset, 0, 16 * zOffset)), center, heightBlocks,
+                        radius);
+                builder.addPiece(piece);
+            }
+        }
     }
 
     @Override

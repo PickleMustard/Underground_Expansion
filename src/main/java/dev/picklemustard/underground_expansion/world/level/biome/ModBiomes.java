@@ -20,7 +20,19 @@ import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class ModBiomes {
+    //Grounded Biomes
     public static final ResourceKey<Biome> DEATH_PIT = register("death_pit");
+    public static final ResourceKey<Biome> GLACIAL_REMANENT = register("glacial_remanent");
+    public static final ResourceKey<Biome> DORMANT_VOLCANO = register("dormant_volcano");
+
+    //Inbetween Biomes
+    public static final ResourceKey<Biome> AQUIFER_OASIS = register("aquifer_oasis");
+    public static final ResourceKey<Biome> DESERTED_NEST = register("deserted_nest");
+
+    //Fantasy Biomes
+    public static final ResourceKey<Biome> BURIED_METROPOLIS = register("buried_metropolis");
+    public static final ResourceKey<Biome> INVERSE_CAVE = register("inverse_cave");
+    public static final ResourceKey<Biome> FLESHY_MASS = register("fleshy_mass");
 
     private static ResourceKey<Biome> register(String name) {
         return ResourceKey.create(Registries.BIOME,

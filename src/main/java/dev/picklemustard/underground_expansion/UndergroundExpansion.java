@@ -8,6 +8,7 @@ import dev.picklemustard.underground_expansion.blocks.ModBlocks;
 import dev.picklemustard.underground_expansion.component.ModDataComponents;
 import dev.picklemustard.underground_expansion.entity.ModEntities;
 import dev.picklemustard.underground_expansion.item.ModItems;
+import dev.picklemustard.underground_expansion.world.level.biome.ModRegionsData;
 import dev.picklemustard.underground_expansion.world.structure.ModStructures;
 import dev.picklemustard.underground_expansion.world.structure.pieces.ModPieces;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -74,6 +75,7 @@ public class UndergroundExpansion {
         ModDataComponents.register(modEventBus);
         ModStructures.register(modEventBus);
         ModPieces.register(modEventBus);
+        //ModRegionsData.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
 
 
@@ -96,6 +98,10 @@ public class UndergroundExpansion {
         LOGGER.info("{}{}", Config.MAGIC_NUMBER_INTRODUCTION.get(), Config.MAGIC_NUMBER.getAsInt());
 
         Config.ITEM_STRINGS.get().forEach((item) -> LOGGER.info("ITEM >> {}", item));
+
+        event.enqueueWork(() -> {
+            ModRegionsData.register();
+        });
     }
 
     // Add the example block item to the building blocks tab
