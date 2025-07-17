@@ -4,12 +4,11 @@ import java.util.function.Consumer;
 
 import com.mojang.datafixers.util.Pair;
 
-import dev.picklemustard.underground_expansion.world.level.utils.ClimateParamUtils;
-import dev.picklemustard.underground_expansion.world.level.utils.ClimateParamUtils.ParameterPointListBuilder;
 import dev.picklemustard.underground_expansion.world.level.utils.ClimateParamUtils.Continentalness;
 import dev.picklemustard.underground_expansion.world.level.utils.ClimateParamUtils.Depth;
 import dev.picklemustard.underground_expansion.world.level.utils.ClimateParamUtils.Erosion;
 import dev.picklemustard.underground_expansion.world.level.utils.ClimateParamUtils.Humidity;
+import dev.picklemustard.underground_expansion.world.level.utils.ClimateParamUtils.ParameterPointListBuilder;
 import dev.picklemustard.underground_expansion.world.level.utils.ClimateParamUtils.Temperature;
 import dev.picklemustard.underground_expansion.world.level.utils.ClimateParamUtils.Weirdness;
 import net.minecraft.core.Registry;
