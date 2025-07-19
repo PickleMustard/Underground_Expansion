@@ -4,6 +4,7 @@ import java.util.function.Consumer;
 
 import com.mojang.datafixers.util.Pair;
 
+import dev.picklemustard.underground_expansion.world.level.utils.ClimateParamUtils;
 import dev.picklemustard.underground_expansion.world.level.utils.ClimateParamUtils.Continentalness;
 import dev.picklemustard.underground_expansion.world.level.utils.ClimateParamUtils.Depth;
 import dev.picklemustard.underground_expansion.world.level.utils.ClimateParamUtils.Erosion;
@@ -31,8 +32,8 @@ public class ModRegionsProvider extends Region {
         VanillaParameterOverlayBuilder builder = new VanillaParameterOverlayBuilder();
 
         new ParameterPointListBuilder().temperature(Temperature.span(Temperature.WARM, Temperature.HOT))
-                .humidity(Humidity.span(Humidity.ARID, Humidity.DRY)).continentalness(Continentalness.INLAND)
-                .erosion(Erosion.EROSION_0, Erosion.EROSION_1).depth(Depth.MID_DEPTH)
+                .humidity(ClimateParamUtils.span(-0.25f, -0.1f)).continentalness(Continentalness.INLAND)
+                .erosion(Erosion.EROSION_1, Erosion.EROSION_2).depth(Depth.MID_DEPTH)
                 .weirdness(Weirdness.MID_SLICE_NORMAL_ASCENDING, Weirdness.MID_SLICE_NORMAL_DESCENDING).build()
                 .forEach(point -> builder.add(point, ModBiomes.DEATH_PIT));
 

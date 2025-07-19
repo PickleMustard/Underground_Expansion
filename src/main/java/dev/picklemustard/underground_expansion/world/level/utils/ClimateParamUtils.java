@@ -9,6 +9,9 @@ import com.google.common.collect.Lists;
 import net.minecraft.world.level.biome.Climate;
 
 public class ClimateParamUtils {
+    public static Climate.Parameter span(float min, float max) {
+        return Climate.Parameter.span(min, max);
+    }
 
     public static class ParameterPointListBuilder {
         private List<Climate.Parameter> Temperatures = Lists.newArrayList();
@@ -245,6 +248,7 @@ public class ClimateParamUtils {
             return Climate.Parameter.span(Climate.unquantizeCoord(min.parameter().min()),
                     Climate.unquantizeCoord(max.parameter().max()));
         }
+
     }
 
     /**

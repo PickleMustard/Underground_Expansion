@@ -11,7 +11,9 @@ import dev.picklemustard.underground_expansion.world.structure.pieces.DeathPitVa
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.RandomState;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
@@ -78,25 +80,27 @@ public class DeathPitVase extends Structure {
         ChunkPos structurePosition = context.chunkPos();
         int xPos = structurePosition.getMiddleBlockX();
         int zPos = structurePosition.getMiddleBlockZ();
-        int yPos = 60;
+        LevelHeightAccessor levelHeight = context.heightAccessor();
+        int yPos = context.chunkGenerator().getBaseHeight(xPos, zPos, Heightmap.Types.OCEAN_FLOOR_WG,levelHeight, context.randomState());
+        if(yPos < context.chunkGenerator().getSeaLevel()) {
+            return Optional.empty();
+        }
         return Optional.of(new Structure.GenerationStub(new BlockPos(xPos, yPos, zPos), builderConsumer));
     }
 
     public void generatePieces(StructurePiecesBuilder builder, Structure.GenerationContext context) {
         ChunkPos centerPiece = context.chunkPos();
-        int radius = context.random().nextInt(5, 10);
-        int heightBlocks = 5;
+        int radius = context.random().nextInt(5, 12);
+        int heightBlocks = context.random().nextInt(25, 50);
+        int surfaceHeight = context.chunkGenerator().getBaseHeight(centerPiece.getMinBlockX(), centerPiece.getMinBlockZ(), Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor(), context.randomState());
         BlockPos center = new BlockPos(centerPiece.getMinBlockX(),
-                context.chunkGenerator().getBaseHeight(centerPiece.getMinBlockX(),
-                        centerPiece.getMinBlockZ(), Heightmap.Types.WORLD_SURFACE_WG,
-                        context.heightAccessor(), context.randomState()),
-                // */ context.chunkGenerator().getSeaLevel() - context.random().nextInt(0, 20),
+                surfaceHeight - context.random().nextInt(10, 20),
                 centerPiece.getMinBlockZ());
         for (int xOffset = -1; xOffset <= 0; xOffset++) {
             for (int zOffset = -1; zOffset <= 0; zOffset++) {
                 StructurePiece piece = new DeathPitVaseStructurePiece(
                         center.offset(new BlockPos(16 * xOffset, 0, 16 * zOffset)), center, heightBlocks,
-                        radius);
+                        radius, surfaceHeight, context.randomState());
                 builder.addPiece(piece);
             }
         }
