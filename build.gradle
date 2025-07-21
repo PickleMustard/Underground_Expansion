@@ -20,6 +20,13 @@ group = mod_group_id
 repositories {
     maven { url = 'https://maven.minecraftforge.net'}
     maven { url = 'https://repo.spongepowered.org/repository/maven-public'}
+    maven {
+        name = 'GeckoLib'
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroup("software.bernie.geckolib")
+        }
+    }
     // Add here additional repositories if required by some of the dependencies below.
 }
 
@@ -102,6 +109,7 @@ dependencies {
     // For all intends and purposes: You can treat this dependency as if it is a normal library you would use.
     implementation "net.neoforged:neoforge:${neo_version}"
     implementation 'com.github.glitchfiend:TerraBlender-neoforge:1.21.1-4.1.0.8'
+    implementation "software.bernie.geckolib:geckolib-neoforge-1.21.1:4.7.6"
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
