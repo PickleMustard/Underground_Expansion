@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 
 import dev.picklemustard.underground_expansion.blocks.ModBlocks;
 import dev.picklemustard.underground_expansion.entity.ModEntities;
+import dev.picklemustard.underground_expansion.entity.client.renderer.PitViperRenderer;
 import dev.picklemustard.underground_expansion.entity.client.renderer.RisingBlockRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -39,6 +40,7 @@ public class UndergroundExpansionClient {
         UndergroundExpansion.LOGGER.info("HELLO FROM CLIENT SETUP");
         UndergroundExpansion.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         EntityRenderers.register(ModEntities.RISING_BLOCK.get(), RisingBlockRenderer::new);
+        EntityRenderers.register(ModEntities.PIT_VIPER.get(), PitViperRenderer::new);
         UndergroundExpansion.LOGGER.info(BuiltInRegistries.BLOCK.getKey(ModBlocks.INVERSE_SAND_BLOCK.get()).toString());
         ImmutableList<BlockState> states = ModBlocks.INVERSE_SAND_BLOCK.get().getStateDefinition().getPossibleStates();
         for (BlockState blockState : states) {

@@ -1,23 +1,35 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"bite": {
+		"attack.bite": {
 			"animation_length": 1.5,
 			"bones": {
 				"face": {
 					"rotation": {
-						"vector": [0, 0, 0]
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.75": {
+							"vector": [0, 0, 15],
+							"easing": "easeInQuad"
+						},
+						"1.25": {
+							"vector": [0, 0, 12.5]
+						},
+						"1.5": {
+							"vector": [0, 0, 0]
+						}
 					},
 					"position": {
 						"0.0": {
 							"vector": [0, 0, 0]
 						},
 						"0.75": {
-							"vector": [0.25, 1, 0],
+							"vector": [1.5, 4, 0],
 							"easing": "easeInBack"
 						},
 						"1.25": {
-							"vector": [-0.25, 1, 0]
+							"vector": [-2.5, 3, 0]
 						},
 						"1.5": {
 							"vector": [0, 0, 0]
@@ -59,25 +71,6 @@
 						"1.5": {
 							"vector": [1, 1, 1],
 							"easing": "easeOutCubic"
-						}
-					}
-				},
-				"pit_viper": {
-					"position": {
-						"0.0": {
-							"vector": [0, 0, 0]
-						},
-						"0.75": {
-							"vector": [0.25, 0, 0]
-						},
-						"1.0": {
-							"vector": [0.5, 0, 0]
-						},
-						"1.25": {
-							"vector": [-0.75, 0, 0]
-						},
-						"1.5": {
-							"vector": [0, 0, 0]
 						}
 					}
 				},
@@ -159,8 +152,8 @@
 							"easing": "easeInQuart"
 						},
 						"1.25": {
-							"vector": [1.175, 1, 1],
-							"easing": "easeInQuad"
+							"vector": [1.475, 1, 1],
+							"easing": "easeOutQuad"
 						},
 						"1.5": {
 							"vector": [1, 1, 1]
@@ -209,7 +202,7 @@
 				}
 			}
 		},
-		"movement": {
+		"move.walk": {
 			"loop": true,
 			"animation_length": 1,
 			"bones": {
@@ -317,6 +310,30 @@
 						"1.0": {
 							"vector": [0, 0, -0.25]
 						}
+					}
+				}
+			}
+		},
+		"misc.idle": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"face": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.0": {
+							"vector": [-17.5, 0, 0],
+							"easing": "easeInOutBack"
+						},
+						"2.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeInOutBack"
+						}
+					},
+					"position": {
+						"vector": [0, 0, 0]
 					}
 				}
 			}

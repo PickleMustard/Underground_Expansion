@@ -3,6 +3,8 @@ package dev.picklemustard.underground_expansion.world.level.biome;
 import javax.annotation.Nullable;
 
 import dev.picklemustard.underground_expansion.UndergroundExpansion;
+import dev.picklemustard.underground_expansion.world.level.carvers.ModCarverRegistration;
+import dev.picklemustard.underground_expansion.world.level.carvers.ModCarvers;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
@@ -16,6 +18,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
@@ -73,6 +76,7 @@ public class ModBiomes {
         MobSpawnSettings.Builder mbs$builder = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mbs$builder);
         BiomeGenerationSettings.Builder bgs$builder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
+        bgs$builder.addCarver(GenerationStep.Carving.AIR, ModCarverRegistration.LAVA_TUBE);
         BiomeDefaultFeatures.addBlueIce(bgs$builder);
         Music bgm = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_BASALT_DELTAS);
 
