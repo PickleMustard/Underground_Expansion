@@ -1,6 +1,6 @@
 package dev.picklemustard.underground_expansion.world.structure;
 
-import dev.picklemustard.underground_expansion.world.level.biome.ModBiomeTags;
+import dev.picklemustard.underground_expansion.datagen.ModBiomeTagProvider;
 import dev.picklemustard.underground_expansion.world.level.biome.ModBiomes;
 import dev.picklemustard.underground_expansion.world.structure.structures.DeathPitVase;
 import net.minecraft.core.HolderGetter;
@@ -21,7 +21,7 @@ public class ModStructureProvider {
 
         context.register(ModStructures.DEATH_PIT_VASE_KEY,
                 new DeathPitVase(
-                        new Structure.StructureSettings.Builder(biomeHolder.getOrThrow(ModBiomeTags.IS_DEATH_PIT))
+                        new Structure.StructureSettings.Builder(biomeHolder.getOrThrow(ModBiomeTagProvider.IS_DEATH_PIT))
                                 .generationStep(GenerationStep.Decoration.RAW_GENERATION).build(),
                         templatePoolHolder.getOrThrow(DeathPitStructurePools.START), 12,
                         ConstantHeight.of(VerticalAnchor.absolute(0)), 128));

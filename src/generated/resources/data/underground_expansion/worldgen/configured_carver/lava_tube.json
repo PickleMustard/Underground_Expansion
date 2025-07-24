@@ -1,0 +1,59 @@
+{
+  "type": "underground_expansion:lava_tube",
+  "config": {
+    "angle": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 1.4,
+      "min_inclusive": 0.8
+    },
+    "central_radius": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 1.4,
+      "min_inclusive": 0.7
+    },
+    "debug_settings": {
+      "air_state": {
+        "Name": "minecraft:birch_button",
+        "Properties": {
+          "face": "wall",
+          "facing": "north",
+          "powered": "false"
+        }
+      },
+      "barrier_state": {
+        "Name": "minecraft:glass"
+      },
+      "debug_mode": true,
+      "lava_state": {
+        "Name": "minecraft:orange_stained_glass"
+      },
+      "water_state": {
+        "Name": "minecraft:candle",
+        "Properties": {
+          "candles": "1",
+          "lit": "false",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "lava_level": {
+      "above_bottom": 8
+    },
+    "probability": 0.15,
+    "replaceable": "#minecraft:overworld_carver_replaceables",
+    "y": {
+      "type": "minecraft:uniform",
+      "max_inclusive": {
+        "absolute": 180
+      },
+      "min_inclusive": {
+        "above_bottom": 8
+      }
+    },
+    "yScale": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 0.9,
+      "min_inclusive": 0.1
+    }
+  }
+}

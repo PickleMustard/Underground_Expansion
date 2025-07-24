@@ -9,6 +9,7 @@ import dev.picklemustard.underground_expansion.component.ModDataComponents;
 import dev.picklemustard.underground_expansion.entity.ModEntities;
 import dev.picklemustard.underground_expansion.item.ModItems;
 import dev.picklemustard.underground_expansion.world.level.biome.ModRegionsData;
+import dev.picklemustard.underground_expansion.world.level.carvers.ModCarvers;
 import dev.picklemustard.underground_expansion.world.structure.ModStructures;
 import dev.picklemustard.underground_expansion.world.structure.pieces.ModPieces;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -77,6 +78,7 @@ public class UndergroundExpansion {
         ModDataComponents.register(modEventBus);
         ModStructures.register(modEventBus);
         ModPieces.register(modEventBus);
+        ModCarvers.register(modEventBus);
         //ModRegionsData.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
 

@@ -1,2 +1,5 @@
-// 1.21.1	2025-07-14T15:35:38.248789387	Registries
-5cd6b80739023804b1ef440ce5de9cc70ab0fbeb data/underground_expansion/worldgen/biome/death_pit.json
+// 1.21.1	2025-07-23T19:45:58.612575095	Registries
+c857701416d5d0b29941ab9676c9816ae26f036a data/underground_expansion/worldgen/biome/death_pit.json
+874628d65b6d9a37b7b0610fd8ebde31e269bff4 data/underground_expansion/worldgen/configured_carver/lava_tube.json
+632240cb9f10d55725f4de91e32330d68995dc87 data/underground_expansion/worldgen/structure/death_pit_vase.json
+ed2435f785116fca85409d56eed425e5e7e6b0e9 data/underground_expansion/worldgen/structure_set/death_pit_vase.json

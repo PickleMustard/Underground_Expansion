@@ -1,5 +1,7 @@
 {
-  "carvers": {},
+  "carvers": {
+    "air": "underground_expansion:lava_tube"
+  },
   "downfall": 0.5,
   "effects": {
     "fog_color": 12638463,

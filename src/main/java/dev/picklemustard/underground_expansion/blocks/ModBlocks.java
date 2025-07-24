@@ -1,6 +1,5 @@
 package dev.picklemustard.underground_expansion.blocks;
 
-
 import java.util.function.Supplier;
 
 import com.mojang.logging.LogUtils;
@@ -21,14 +20,13 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(UndergroundExpansion.MODID);
 
     public static final DeferredBlock<Block> INVERSE_SAND_BLOCK = registerBlock(
-        "inverse_sand",
-        () -> new InverseSandBlock(
-            new ColorRGBA(14406560),
-            BlockBehaviour.Properties.of().strength(0.5f).sound(SoundType.SAND)
-        )
-    );
+            "inverse_sand",
+            () -> new InverseSandBlock(
+                    new ColorRGBA(14406560),
+                    BlockBehaviour.Properties.of().strength(0.5f).sound(SoundType.SAND)));
 
-    public static final DeferredBlock<Block> SEPUCHRAL_STONE_BLOCK = registerBlock("sepuchral_stone", () -> new Block(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> SEPUCHRAL_STONE_BLOCK = registerBlock("sepuchral_stone", () -> new Block(
+            BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
 
     public static <T extends Block> DeferredBlock<T> registerBlock(String key, Supplier<T> block) {
         DeferredBlock<T> registeredBlock = BLOCKS.register(key, block);
@@ -45,4 +43,3 @@ public class ModBlocks {
         LogUtils.getLogger().info("Namespace: {}", BLOCKS.getNamespace());
     }
 }
-

@@ -31,11 +31,13 @@ public class ModBiomes {
     //Inbetween Biomes
     public static final ResourceKey<Biome> AQUIFER_OASIS = register("aquifer_oasis");
     public static final ResourceKey<Biome> DESERTED_NEST = register("deserted_nest");
+    public static final ResourceKey<Biome> SULPHUR_POOLS = register("sulphur_pools");
 
     //Fantasy Biomes
     public static final ResourceKey<Biome> BURIED_METROPOLIS = register("buried_metropolis");
     public static final ResourceKey<Biome> INVERSE_CAVE = register("inverse_cave");
     public static final ResourceKey<Biome> FLESHY_MASS = register("fleshy_mass");
+    public static final ResourceKey<Biome> HEAVENLY_INTRUSION = register("heavenly_intrusion");
 
     private static ResourceKey<Biome> register(String name) {
         return ResourceKey.create(Registries.BIOME,

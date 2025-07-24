@@ -17,10 +17,10 @@ import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 public class ModDatapackProvider extends DatapackBuiltinEntriesProvider {
 
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
-            .add(Registries.BIOME, ModBiomeData::bootstrap)
-            .add(Registries.STRUCTURE_SET, ModStructureSetProvider::bootstrap)
+            .add(Registries.CONFIGURED_CARVER, ModCarverRegistration::bootstrap)
             .add(Registries.STRUCTURE, ModStructureProvider::bootstrap)
-            .add(Registries.CONFIGURED_CARVER, ModCarverRegistration::bootstrap);
+            .add(Registries.STRUCTURE_SET, ModStructureSetProvider::bootstrap)
+            .add(Registries.BIOME, ModBiomeData::bootstrap);
 
     public ModDatapackProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Set.of(UndergroundExpansion.MODID));
