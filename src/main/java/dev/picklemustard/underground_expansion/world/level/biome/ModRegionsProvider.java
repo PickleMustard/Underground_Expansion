@@ -37,6 +37,12 @@ public class ModRegionsProvider extends Region {
                 .weirdness(Weirdness.MID_SLICE_NORMAL_ASCENDING, Weirdness.MID_SLICE_NORMAL_DESCENDING).build()
                 .forEach(point -> builder.add(point, ModBiomes.DEATH_PIT));
 
+        new ParameterPointListBuilder().temperature(Temperature.WARM)
+                .humidity(Humidity.span(Humidity.NEUTRAL, Humidity.HUMID))
+                .continentalness(Continentalness.span(Continentalness.MID_INLAND, Continentalness.FAR_INLAND))
+                .erosion(Erosion.EROSION_5).depth(Depth.MID_DEPTH).weirdness(Weirdness.MID_SLICE_VARIANT_ASCENDING)
+                .build().forEach(point -> builder.add(point, ModBiomes.DESERTED_NEST));
+
         builder.build().forEach(mapper);
 
     }

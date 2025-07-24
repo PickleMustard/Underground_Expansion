@@ -79,10 +79,27 @@ public class ModBiomes {
         BiomeDefaultFeatures.commonSpawns(mbs$builder);
         BiomeGenerationSettings.Builder bgs$builder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         bgs$builder.addCarver(GenerationStep.Carving.AIR, ModCarverRegistration.LAVA_TUBE);
-        BiomeDefaultFeatures.addBlueIce(bgs$builder);
+        BiomeDefaultFeatures.addDefaultOres(bgs$builder);
+        BiomeDefaultFeatures.addDefaultCarversAndLakes(bgs$builder);
+        BiomeDefaultFeatures.addDefaultMonsterRoom(bgs$builder);
+        BiomeDefaultFeatures.addDefaultUndergroundVariety(bgs$builder);
         Music bgm = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_BASALT_DELTAS);
 
-        return biome(true, 0.5f, 0.5f, mbs$builder, bgs$builder, bgm);
+        return biome(false, 0.5f, 0.0f, mbs$builder, bgs$builder, bgm);
+    }
+
+    public static Biome desertedNest(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+        MobSpawnSettings.Builder mbs$builder = new MobSpawnSettings.Builder();
+        BiomeDefaultFeatures.commonSpawns(mbs$builder);
+        BiomeGenerationSettings.Builder bgs$builder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
+        BiomeDefaultFeatures.addDefaultOres(bgs$builder);
+        BiomeDefaultFeatures.addDefaultCarversAndLakes(bgs$builder);
+        BiomeDefaultFeatures.addDefaultMonsterRoom(bgs$builder);
+        BiomeDefaultFeatures.addDefaultUndergroundVariety(bgs$builder);
+        Music bgm = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_BASALT_DELTAS);
+
+        return biome(false, 0.65f, 0.0f, mbs$builder, bgs$builder, bgm);
+
     }
 
 }
