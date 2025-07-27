@@ -3,56 +3,32 @@ package dev.picklemustard.underground_expansion.world.structure.structures;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-import com.mojang.logging.LogUtils;
 import com.mojang.serialization.MapCodec;
 
 import dev.picklemustard.underground_expansion.world.structure.ModStructures;
-import dev.picklemustard.underground_expansion.world.structure.pieces.DeathPitVaseStructurePiece;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.RandomState;
-import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
 import net.minecraft.world.level.levelgen.structure.Structure;
-import net.minecraft.world.level.levelgen.structure.StructurePiece;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
-import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
-public class DeathPitVase extends Structure {
+public class DesertedQumaNest extends Structure {
 
-    private final int size;
-    private final Holder<StructureTemplatePool> startPool;
-    private final HeightProvider startHeight;
-    private final int maxDistanceFromCenter;
+    public static final MapCodec<DesertedQumaNest> CODEC = simpleCodec(DesertedQumaNest::new);
 
-    public static final MapCodec<DeathPitVase> CODEC = simpleCodec(DeathPitVase::new);
-
-    public DeathPitVase(StructureSettings settings, Holder<StructureTemplatePool> startPool, int size,
-            HeightProvider startHeight, int maxDistanceFromCenter) {
+    protected DesertedQumaNest(StructureSettings settings) {
         super(settings);
-        this.size = size;
-        this.startPool = startPool;
-        this.startHeight = startHeight;
-        this.maxDistanceFromCenter = maxDistanceFromCenter;
     }
 
-    protected DeathPitVase(StructureSettings settings) {
-        super(settings);
-        size = 0;
-        startPool = null;
-        startHeight = null;
-        maxDistanceFromCenter = 0;
-    }
-
+    //Find a suitable generation position to generate the structure within
+    //
     @Override
     protected Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
         return determineStructure(context, Heightmap.Types.OCEAN_FLOOR_WG, (builder) -> {
             this.generatePieces(builder, context);
         });
-
     }
 
     public Optional<Structure.GenerationStub> determineStructure(Structure.GenerationContext context,
@@ -88,7 +64,8 @@ public class DeathPitVase extends Structure {
 
     @Override
     public StructureType<?> type() {
-        return ModStructures.DEATH_PIT_VASE.get();
+        return ModStructures.DESERTED_QUMA_NEST.get();
     }
+
 
 }

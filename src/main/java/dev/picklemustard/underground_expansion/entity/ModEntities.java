@@ -25,6 +25,14 @@ public class ModEntities {
 
     //Passive Mob Entities
 
+    //Summoned Mob Entities
+    //public static final Supplier<EntityType<place_holder>> QUMA_DESPOT = MOD_ENTITY_TYPES.register("quma_despot", () -> );
+    //public static final Supplier<EntityType<place_holder>> QUMA_LARVA = MOD_ENTITY_TYPES.register("quma_larva", () -> );
+    //public static final Supplier<EntityType<place_holder>> QUMA_DRONE = MOD_ENTITY_TYPES.register("quma_drone", () -> );
+    //public static final Supplier<EntityType<place_holder>> QUMA_SLATE = MOD_ENTITY_TYPES.register("quma_slate", () -> );
+    //public static final Supplier<EntityType<place_holder>> QUMA_BRUTE = MOD_ENTITY_TYPES.register("quma_brute", () -> );
+    //public static final Supplier<EntityType<place_holder>> QUMA_PLAIN = MOD_ENTITY_TYPES.register("quma_plain", () -> );
+
     public static void register(IEventBus eventBus) {
         MOD_ENTITY_TYPES.register(eventBus);
     }

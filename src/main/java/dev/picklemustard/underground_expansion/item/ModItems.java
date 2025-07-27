@@ -20,6 +20,14 @@ public class ModItems {
     public static final DeferredItem<Item> SECOND_TEST_ITEM = ITEMS.registerSimpleItem("second_test_item",
             new Item.Properties().stacksTo(49));
 
+    //Deserted Nest Items
+    //public static final DeferredItem<place_holder> DESICCATED_LARVA
+    //public static final DeferredItem<place_holder> OLD_NECTAR
+    //public static final DeferredItem<place_holder> ROYAL_NECTAR
+    //public static final DeferredItem<place_holder> WINGED_NECTAR
+    //public static final DeferredItem<place_holder> REINFORCED_NECTAR
+    //public static final DeferredItem<place_holder> SHARPENED_NECTAR
+
     // Mob Spawn Eggs
     public static final DeferredItem<SpawnEggItem> PIT_VIPER_SPAWN_EGG = ITEMS.registerItem("pit_viper_spawn_egg",
             properties -> new DeferredSpawnEggItem(ModEntities.PIT_VIPER, 25, 30, properties));

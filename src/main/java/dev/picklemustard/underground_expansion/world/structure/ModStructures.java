@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import dev.picklemustard.underground_expansion.UndergroundExpansion;
 import dev.picklemustard.underground_expansion.world.structure.structures.DeathPitVase;
+import dev.picklemustard.underground_expansion.world.structure.structures.DesertedQumaNest;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -22,6 +23,7 @@ public class ModStructures {
     public static DeferredRegister<StructureType<?>> STRUCTURES = DeferredRegister.create(Registries.STRUCTURE_TYPE, UndergroundExpansion.MODID);
 
     public static DeferredHolder<StructureType<?>, StructureType<DeathPitVase>> DEATH_PIT_VASE = STRUCTURES.register("death_pit_vase", () -> () -> DeathPitVase.CODEC);
+    public static DeferredHolder<StructureType<?>, StructureType<DesertedQumaNest>> DESERTED_QUMA_NEST = STRUCTURES.register("deserted_quma_nest", () -> () -> DesertedQumaNest.CODEC);
     //public static DeferredHolder<StructureType<?>, StructureType<>> SPEAK_EASY = STRUCTURES.register("speak_easy", );
 
     public static void register(IEventBus eventBus) {
