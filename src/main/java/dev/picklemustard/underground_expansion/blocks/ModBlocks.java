@@ -28,6 +28,18 @@ public class ModBlocks {
     public static final DeferredBlock<Block> SEPUCHRAL_STONE_BLOCK = registerBlock("sepuchral_stone", () -> new Block(
             BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
 
+    public static final DeferredBlock<Block> LARVAL_BLOCK = registerBlock("larval_block",
+            () -> new Block(BlockBehaviour.Properties.of().strength(1f).sound(SoundType.GRAVEL)));
+
+    // public static final DeferredBlock<Block> DECOMPOSING_SOIL_BLOCK =
+    // registerBlock("decomposing_soil", () -> new Block());
+    // public static final DeferredBlock<Block> DECOMPOSING_STONE_BLOCK =
+    // registerBlock("decomposing_stone", () -> new Block());
+    // public static final DeferredBlock<Block> MAGGOT_BLOCK =
+    // registerBlock("maggot_block", () -> new Block());
+    // public static final DeferredBlock<Block> VEERING_EYE_BLOCK =
+    // registerBlock("veering_eye", () -> new Block());
+
     public static <T extends Block> DeferredBlock<T> registerBlock(String key, Supplier<T> block) {
         DeferredBlock<T> registeredBlock = BLOCKS.register(key, block);
         registerBlockItem(key, registeredBlock);
