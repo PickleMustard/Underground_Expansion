@@ -18,7 +18,11 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class ModStructures {
 
     public static ResourceKey<Structure> DEATH_PIT_VASE_KEY = createStructureKey("death_pit_vase");
+    public static ResourceKey<Structure> DESERTED_QUMA_NEST_KEY = createStructureKey("deserted_quma_nest");
+
+
     public static ResourceKey<StructureSet> DEATH_PIT_VASE_STRUCTURE_SET_KEY = createStructureSetKey("death_pit_vase");
+    public static ResourceKey<StructureSet> DESERTED_QUMA_NEST_SET_KEY = createStructureSetKey("deserted_quma_nest");
 
     public static DeferredRegister<StructureType<?>> STRUCTURES = DeferredRegister.create(Registries.STRUCTURE_TYPE, UndergroundExpansion.MODID);
 

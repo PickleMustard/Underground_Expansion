@@ -17,5 +17,6 @@ public class ModBiomeData {
         HolderGetter<PlacedFeature> placedFeatureHG = context.lookup(Registries.PLACED_FEATURE);
         HolderGetter<ConfiguredWorldCarver<?>> worldCarverHG = context.lookup(Registries.CONFIGURED_CARVER);
         context.register(ModBiomes.DEATH_PIT, ModBiomes.deathPit(placedFeatureHG, worldCarverHG));
+        context.register(ModBiomes.DESERTED_NEST, ModBiomes.desertedNest(placedFeatureHG, worldCarverHG));
     }
 }

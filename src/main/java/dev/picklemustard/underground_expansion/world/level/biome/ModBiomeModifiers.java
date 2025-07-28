@@ -15,6 +15,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 public class ModBiomeModifiers {
 
     public static ResourceKey<BiomeModifier> ADD_DEATH_PIT_TAG = createKey("add_death_pit_tag");
+    public static ResourceKey<BiomeModifier> ADD_DESERTED_NEST_TAG = createKey("add_deserted_nest_tag");
 
    public static void bootstrap(BootstrapContext<BiomeModifier> context) {
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);

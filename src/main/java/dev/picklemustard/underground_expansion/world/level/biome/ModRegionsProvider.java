@@ -39,8 +39,8 @@ public class ModRegionsProvider extends Region {
 
         new ParameterPointListBuilder().temperature(Temperature.WARM)
                 .humidity(Humidity.span(Humidity.NEUTRAL, Humidity.HUMID))
-                .continentalness(Continentalness.span(Continentalness.MID_INLAND, Continentalness.FAR_INLAND))
-                .erosion(Erosion.EROSION_5).depth(Depth.MID_DEPTH).weirdness(Weirdness.MID_SLICE_VARIANT_ASCENDING)
+                .continentalness(Continentalness.FAR_INLAND)
+                .erosion(Erosion.EROSION_2).depth(Depth.MID_DEPTH).weirdness(Weirdness.MID_SLICE_VARIANT_ASCENDING)
                 .build().forEach(point -> builder.add(point, ModBiomes.DESERTED_NEST));
 
         builder.build().forEach(mapper);

@@ -33,18 +33,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.INVERSE_SAND_BLOCK.get(),
          cubeAll(ModBlocks.INVERSE_SAND_BLOCK.get()));
         simpleBlockWithItem(ModBlocks.SEPUCHRAL_STONE_BLOCK.get(), cubeAll(ModBlocks.SEPUCHRAL_STONE_BLOCK.get()));
-
-
-        //VariantBlockStateBuilder vb = getVariantBuilder(ModBlocks.INVERSE_SAND_BLOCK.get());
-
-        // LogUtils.getLogger().info(blockTexture(ModBlocks.INVERSE_SAND_BLOCK.get()).toString());
-        LogUtils.getLogger().debug("Registry: {}", ModBlocks.BLOCKS.getRegistry());
-        LogUtils.getLogger().debug("Entries: {}", ModBlocks.BLOCKS.getEntries());
-        // LogUtils.getLogger().info(ResourceLocation.fromNamespaceAndPath(name.getNamespace(),
-        // ModelProvider.BLOCK_FOLDER + "/" + name.getPath()));
-        // models().cubeAll(name(ModBlocks.INVERSE_SAND_BLOCK.get()),
-        // blockTexture(ModBlocks.INVERSE_SAND_BLOCK.get()));
-
+        simpleBlockWithItem(ModBlocks.LARVAL_BLOCK.get(), cubeAll(ModBlocks.LARVAL_BLOCK.get()));
     }
 
 }

@@ -8,6 +8,7 @@ import dev.picklemustard.underground_expansion.world.level.carvers.ModCarvers;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
+import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.Music;
@@ -66,12 +67,20 @@ public class ModBiomes {
     }
 
     private static void globalOverworldGeneration(BiomeGenerationSettings.Builder generationSettings) {
-        BiomeDefaultFeatures.addDefaultCarversAndLakes(generationSettings);
         BiomeDefaultFeatures.addDefaultCrystalFormations(generationSettings);
         BiomeDefaultFeatures.addDefaultMonsterRoom(generationSettings);
         BiomeDefaultFeatures.addDefaultUndergroundVariety(generationSettings);
-        BiomeDefaultFeatures.addDefaultSprings(generationSettings);
         BiomeDefaultFeatures.addSurfaceFreezing(generationSettings);
+        BiomeDefaultFeatures.addDefaultCarversAndLakes(generationSettings);
+        BiomeDefaultFeatures.addDefaultSprings(generationSettings);
+    }
+
+    private static void globalUndergroundGeneration(BiomeGenerationSettings.Builder generationSettings) {
+        BiomeDefaultFeatures.addDefaultCrystalFormations(generationSettings);
+        BiomeDefaultFeatures.addDefaultMonsterRoom(generationSettings);
+        BiomeDefaultFeatures.addDefaultUndergroundVariety(generationSettings);
+        BiomeDefaultFeatures.addSurfaceFreezing(generationSettings);
+        BiomeDefaultFeatures.addDefaultOres(generationSettings);
     }
 
     public static Biome deathPit(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
@@ -79,10 +88,7 @@ public class ModBiomes {
         BiomeDefaultFeatures.commonSpawns(mbs$builder);
         BiomeGenerationSettings.Builder bgs$builder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         bgs$builder.addCarver(GenerationStep.Carving.AIR, ModCarverRegistration.LAVA_TUBE);
-        BiomeDefaultFeatures.addDefaultOres(bgs$builder);
-        BiomeDefaultFeatures.addDefaultCarversAndLakes(bgs$builder);
-        BiomeDefaultFeatures.addDefaultMonsterRoom(bgs$builder);
-        BiomeDefaultFeatures.addDefaultUndergroundVariety(bgs$builder);
+        globalUndergroundGeneration(bgs$builder);
         Music bgm = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_BASALT_DELTAS);
 
         return biome(false, 0.5f, 0.0f, mbs$builder, bgs$builder, bgm);
@@ -92,13 +98,13 @@ public class ModBiomes {
         MobSpawnSettings.Builder mbs$builder = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(mbs$builder);
         BiomeGenerationSettings.Builder bgs$builder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
-        BiomeDefaultFeatures.addDefaultOres(bgs$builder);
-        BiomeDefaultFeatures.addDefaultCarversAndLakes(bgs$builder);
-        BiomeDefaultFeatures.addDefaultMonsterRoom(bgs$builder);
-        BiomeDefaultFeatures.addDefaultUndergroundVariety(bgs$builder);
+        bgs$builder.addCarver(GenerationStep.Carving.AIR, Carvers.CAVE);
+        bgs$builder.addCarver(GenerationStep.Carving.AIR, Carvers.CAVE_EXTRA_UNDERGROUND);
+        bgs$builder.addCarver(GenerationStep.Carving.AIR, Carvers.CANYON);
+        globalUndergroundGeneration(bgs$builder);
         Music bgm = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_BASALT_DELTAS);
 
-        return biome(false, 0.65f, 0.0f, mbs$builder, bgs$builder, bgm);
+        return biome(true, 0.65f, 0.0f, mbs$builder, bgs$builder, bgm);
 
     }
 

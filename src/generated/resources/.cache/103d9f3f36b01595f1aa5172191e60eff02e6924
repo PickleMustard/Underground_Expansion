@@ -1,5 +1,8 @@
-// 1.21.1	2025-07-23T19:45:58.612575095	Registries
-c857701416d5d0b29941ab9676c9816ae26f036a data/underground_expansion/worldgen/biome/death_pit.json
+// 1.21.1	2025-07-28T17:04:25.646358216	Registries
+dbdebdab4a2cb09a5a47c32776507cb4d9158eda data/underground_expansion/worldgen/biome/death_pit.json
+2b39c60c287b551251e09b48517277c9701ef186 data/underground_expansion/worldgen/biome/deserted_nest.json
 874628d65b6d9a37b7b0610fd8ebde31e269bff4 data/underground_expansion/worldgen/configured_carver/lava_tube.json
 632240cb9f10d55725f4de91e32330d68995dc87 data/underground_expansion/worldgen/structure/death_pit_vase.json
+b0d88009291195e9e640eee0cf63d3a0248be71e data/underground_expansion/worldgen/structure/deserted_quma_nest.json
 ed2435f785116fca85409d56eed425e5e7e6b0e9 data/underground_expansion/worldgen/structure_set/death_pit_vase.json
+fdf91849d383806028469332416d9e5ebb219a47 data/underground_expansion/worldgen/structure_set/deserted_quma_nest.json

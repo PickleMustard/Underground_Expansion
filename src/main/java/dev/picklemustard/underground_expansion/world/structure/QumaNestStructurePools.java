@@ -8,15 +8,14 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.Pools;
-import net.minecraft.data.worldgen.ProcessorLists;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 
-public class DeathPitStructurePools {
-    public static final ResourceKey<StructureTemplatePool> START = Pools.createKey("death_pit_vase/dungeon/entry");
+public class QumaNestStructurePools {
+    public static final ResourceKey<StructureTemplatePool> START = Pools.createKey("deserted_quma_nest/dungeon/entry");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<PlacedFeature> placedFeatureHolder = context.lookup(Registries.PLACED_FEATURE);
@@ -24,7 +23,8 @@ public class DeathPitStructurePools {
         HolderGetter<StructureTemplatePool> templatePoolHolder = context.lookup(Registries.TEMPLATE_POOL);
         Holder<StructureTemplatePool> emptyFallback = templatePoolHolder.getOrThrow(Pools.EMPTY);
 
-        Pools.register(context, "death_pit_vase/dungeon", new StructureTemplatePool(emptyFallback, ImmutableList.of(Pair.of(StructurePoolElement.empty(), 1)), StructureTemplatePool.Projection.RIGID));
+        Pools.register(context, "deserted_quma_nest/dungeon", new StructureTemplatePool(emptyFallback,
+                ImmutableList.of(Pair.of(StructurePoolElement.empty(), 1)), StructureTemplatePool.Projection.RIGID));
 
     }
 

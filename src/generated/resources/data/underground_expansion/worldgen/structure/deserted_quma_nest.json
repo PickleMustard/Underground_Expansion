@@ -1,0 +1,6 @@
+{
+  "type": "underground_expansion:deserted_quma_nest",
+  "biomes": "#underground_expansion:is_deserted_nest",
+  "spawn_overrides": {},
+  "step": "raw_generation"
+}

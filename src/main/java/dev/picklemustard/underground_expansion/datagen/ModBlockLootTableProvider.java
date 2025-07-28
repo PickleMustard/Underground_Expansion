@@ -28,6 +28,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider{
 
         dropSelf(ModBlocks.INVERSE_SAND_BLOCK.get());
         dropSelf(ModBlocks.SEPUCHRAL_STONE_BLOCK.get());
+        dropSelf(ModBlocks.LARVAL_BLOCK.get());
     }
 
     @Override

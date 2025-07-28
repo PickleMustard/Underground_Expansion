@@ -1,7 +1,10 @@
-// 1.21.1	2025-07-11T22:30:26.07197911	Block States: underground_expansion
+// 1.21.1	2025-07-27T23:09:09.473868714	Block States: underground_expansion
 7789bfd12fd39ab202d09317217fec384fa92456 assets/underground_expansion/blockstates/inverse_sand.json
+691638ba68e2656285b6d85daf3e1d4641c1c9fa assets/underground_expansion/blockstates/larval_block.json
 6bace1c85f45caac605bfb6780f5674fd62cae3e assets/underground_expansion/blockstates/sepuchral_stone.json
 a8935d493d462ec6812fb125970bca3b490bfacd assets/underground_expansion/models/block/inverse_sand.json
+3819d0b4fdfe84a598ebe28017c211ab188b8e25 assets/underground_expansion/models/block/larval_block.json
 13be5d34f11c022fac6f8d43ec2376342023675d assets/underground_expansion/models/block/sepuchral_stone.json
 a1ebce299686799829413c55d0b79252551c8179 assets/underground_expansion/models/item/inverse_sand.json
+aba2501144daa95f77d1377befa455e1f799c149 assets/underground_expansion/models/item/larval_block.json
 f09ebf13e06cefc5c62992bd93b7afc009e21fcc assets/underground_expansion/models/item/sepuchral_stone.json

@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1092875,
+    "separation": 3,
+    "spacing": 6
+  },
+  "structures": [
+    {
+      "structure": "underground_expansion:deserted_quma_nest",
+      "weight": 1
+    }
+  ]
+}

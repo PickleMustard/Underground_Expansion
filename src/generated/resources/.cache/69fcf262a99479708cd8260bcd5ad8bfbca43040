@@ -1,2 +1,3 @@
-// 1.21.1	2025-07-23T21:02:37.138864623	Tags for minecraft:worldgen/biome mod id underground_expansion
+// 1.21.1	2025-07-28T16:33:56.483704001	Tags for minecraft:worldgen/biome mod id underground_expansion
 285fb46f94d904d2009455a17ff48b7c423fc085 data/underground_expansion/tags/worldgen/biome/is_death_pit.json
+64f02a5f4a03d8bd3afc685a7b8969d1b770d7aa data/underground_expansion/tags/worldgen/biome/is_deserted_nest.json

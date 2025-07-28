@@ -20,6 +20,10 @@ public class ModStructureSetProvider {
         context.register(ModStructures.DEATH_PIT_VASE_STRUCTURE_SET_KEY,
                 new StructureSet(structureHolder.getOrThrow(ModStructures.DEATH_PIT_VASE_KEY),
                         new RandomSpreadStructurePlacement(6, 3, RandomSpreadType.LINEAR, 29485)));
+
+        context.register(ModStructures.DESERTED_QUMA_NEST_SET_KEY,
+                new StructureSet(structureHolder.getOrThrow(ModStructures.DESERTED_QUMA_NEST_KEY),
+                        new RandomSpreadStructurePlacement(6, 3, RandomSpreadType.LINEAR, 1092875)));
     }
 
 }

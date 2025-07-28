@@ -25,6 +25,7 @@ public class ModBiomeTagProvider extends BiomeTagsProvider {
     }
 
     public static final TagKey<Biome> IS_DEATH_PIT = register("is_death_pit");
+    public static final TagKey<Biome> IS_DESERTED_NEST = register("is_deserted_nest");
 
     private static TagKey<Biome> register(String name) {
         return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(UndergroundExpansion.MODID, name));
@@ -34,5 +35,6 @@ public class ModBiomeTagProvider extends BiomeTagsProvider {
     protected void addTags(HolderLookup.Provider lookupProvider) {
         HolderGetter<Biome> biomeHolder = lookupProvider.lookupOrThrow(Registries.BIOME);
         this.tag(IS_DEATH_PIT).add(ModBiomes.DEATH_PIT);
+        this.tag(IS_DESERTED_NEST).add(ModBiomes.DESERTED_NEST);
     }
 }
