@@ -11,7 +11,8 @@ public class ModPieces {
     public static final DeferredRegister<StructurePieceType> MOD_STRUCTURE_PIECES = DeferredRegister.create(Registries.STRUCTURE_PIECE, UndergroundExpansion.MODID);
 
     public static final DeferredHolder<StructurePieceType, StructurePieceType> DEATH_PIT_VASE_SP = MOD_STRUCTURE_PIECES.register("death_pit_vase", () -> DeathPitVaseStructurePiece::new);
-    public static final DeferredHolder<StructurePieceType, StructurePieceType> DESERTED_QUMA_NEST_SP = MOD_STRUCTURE_PIECES.register("deserted_quma_nest", () -> DesertedQumaNestStructurePieces.DespotsChamber::new);
+    public static final DeferredHolder<StructurePieceType, StructurePieceType> DESERTED_QUMA_NEST_DESPOT_CHAMBER_SP = MOD_STRUCTURE_PIECES.register("deserted_quma_nest_despot_chamber", () -> DesertedQumaNestStructurePieces.DespotsChamber::new);
+    public static final DeferredHolder<StructurePieceType, StructurePieceType> DESERTED_QUMA_NEST_TUNNEL_SP = MOD_STRUCTURE_PIECES.register("deserted_quma_nest_tunnel", () -> DesertedQumaNestStructurePieces.NestTunnel::new);
 
     public static void register(IEventBus eventBus) {
         MOD_STRUCTURE_PIECES.register(eventBus);

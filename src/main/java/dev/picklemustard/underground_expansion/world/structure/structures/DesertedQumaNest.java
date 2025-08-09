@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
+import com.mojang.logging.LogUtils;
 import com.mojang.serialization.MapCodec;
 
 import dev.picklemustard.underground_expansion.world.structure.ModStructures;
@@ -53,14 +54,15 @@ public class DesertedQumaNest extends Structure {
         int zPos = structurePosition.getMiddleBlockZ();
         LevelHeightAccessor levelHeight = context.heightAccessor();
         int yPos = context.chunkGenerator().getBaseHeight(xPos, zPos, Heightmap.Types.OCEAN_FLOOR_WG, levelHeight,
-                context.randomState());
+                context.randomState()) - context.random().nextInt(5, 20);
         if (yPos < context.chunkGenerator().getSeaLevel()) {
-            return Optional.empty();
+            return Optional.of(new Structure.GenerationStub(new BlockPos(xPos, yPos, zPos), builderConsumer));
         }
-        return Optional.of(new Structure.GenerationStub(new BlockPos(xPos, yPos, zPos), builderConsumer));
+        return Optional.empty();
     }
 
     public void generatePieces(StructurePiecesBuilder builder, Structure.GenerationContext context) {
+        LogUtils.getLogger().info("meow!");
         ChunkPos centerPiece = context.chunkPos();
         int radius = context.random().nextInt(5, 12);
         int heightBlocks = context.random().nextInt(25, 50);
@@ -70,17 +72,18 @@ public class DesertedQumaNest extends Structure {
         BlockPos center = new BlockPos(centerPiece.getMinBlockX(),
                 surfaceHeight - context.random().nextInt(10, 20),
                 centerPiece.getMinBlockZ());
-        for (int xOffset = -1; xOffset <= 0; xOffset++) {
-            for (int zOffset = -1; zOffset <= 0; zOffset++) {
-                DesertedQumaNestStructurePieces.DespotsChamber qumanest$despotchamber = new DesertedQumaNestStructurePieces.DespotsChamber(
-                        center.offset(new BlockPos(16 * xOffset, 0, 16 * zOffset)), center, heightBlocks,
-                        radius, surfaceHeight);
-                builder.addPiece(qumanest$despotchamber);
-                qumanest$despotchamber.addChildren(qumanest$despotchamber, builder, context.random());
-                List<StructurePiece> list = qumanest$despotchamber.pendingChildren;
-
-            }
+        DesertedQumaNestStructurePieces.DespotsChamber qumanest$despotchamber = new DesertedQumaNestStructurePieces.DespotsChamber(
+                center.offset(new BlockPos(16 * xOffset, 0, 16 * zOffset)), center, surfaceHeight - heightBlocks,
+                radius, surfaceHeight);
+        builder.addPiece(qumanest$despotchamber);
+        qumanest$despotchamber.addChildren(qumanest$despotchamber, builder, context.random());
+        List<StructurePiece> list = qumanest$despotchamber.pendingChildren;
+        while(!list.isEmpty()) {
+            int i = context.random().nextInt(list.size());
+            StructurePiece nextPiece = list.remove(i);
+            nextPiece.addChildren(qumanest$despotchamber, builder, context.random());
         }
+
     }
 
     @Override
