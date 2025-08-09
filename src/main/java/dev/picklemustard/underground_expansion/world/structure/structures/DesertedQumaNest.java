@@ -10,6 +10,7 @@ import com.mojang.serialization.MapCodec;
 import dev.picklemustard.underground_expansion.world.structure.ModStructures;
 import dev.picklemustard.underground_expansion.world.structure.pieces.DesertedQumaNestStructurePieces;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
@@ -72,13 +73,13 @@ public class DesertedQumaNest extends Structure {
         BlockPos center = new BlockPos(centerPiece.getMinBlockX(),
                 surfaceHeight - context.random().nextInt(10, 20),
                 centerPiece.getMinBlockZ());
-        DesertedQumaNestStructurePieces.DespotsChamber qumanest$despotchamber = new DesertedQumaNestStructurePieces.DespotsChamber(
-                center.offset(new BlockPos(16 * xOffset, 0, 16 * zOffset)), center, surfaceHeight - heightBlocks,
-                radius, surfaceHeight);
+        DesertedQumaNestStructurePieces.DespotsChamber qumanest$despotchamber = DesertedQumaNestStructurePieces.DespotsChamber
+                .startStructure(center.getX(), center.getY(), center.getZ(), heightBlocks,
+                        radius, center.getY(), Direction.from3DDataValue(context.random().nextInt(0, 5)));
         builder.addPiece(qumanest$despotchamber);
         qumanest$despotchamber.addChildren(qumanest$despotchamber, builder, context.random());
         List<StructurePiece> list = qumanest$despotchamber.pendingChildren;
-        while(!list.isEmpty()) {
+        while (!list.isEmpty()) {
             int i = context.random().nextInt(list.size());
             StructurePiece nextPiece = list.remove(i);
             nextPiece.addChildren(qumanest$despotchamber, builder, context.random());

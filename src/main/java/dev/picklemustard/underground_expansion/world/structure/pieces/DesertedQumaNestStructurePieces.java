@@ -48,8 +48,8 @@ public class DesertedQumaNestStructurePieces {
     static final DesertedQumaNestStructurePieces.ChamberWeight[] CHAMBER_WEIGHTS = new ChamberWeight[] {
     };
 
-    static final DesertedQumaNestStructurePieces.ChamberWeight[] TUNNEL_WEIGHTS = new ChamberWeight[]{
-        new ChamberWeight(NestTunnel.class, 30, 0),
+    static final DesertedQumaNestStructurePieces.ChamberWeight[] TUNNEL_WEIGHTS = new ChamberWeight[] {
+            new ChamberWeight(NestTunnel.class, 30, 0),
     };
 
     protected enum NestPieceType implements StringRepresentable {
@@ -70,6 +70,14 @@ public class DesertedQumaNestStructurePieces {
         }
     }
 
+    public static DesertedQumaNestPiece pieceCreationFactory(ChamberWeight weight, StructurePieceAccessor pieces, RandomSource random, int x, int y, int z, Direction orientation, int genDepth) {
+        if(weight.pieceClass == NestTunnel.class) {
+            return NestTunnel.createPiece(pieces, x, y, z, orientation, genDepth, 0.5f, 0.5f);
+        } else if(weight.pieceClass == DespotsChamber.class) {
+            return DespotsChamber.startStructure(x, y, z, weight.maxPlaceCount, weight.weight, genDepth, orientation);
+        }
+        return null;
+    }
     public abstract static class DesertedQumaNestPiece extends StructurePiece {
         protected NestPieceType pieceType;
 
@@ -92,12 +100,15 @@ public class DesertedQumaNestStructurePieces {
                     corner.getMaxBlockZ());
         }
 
-        //public DesertedQumaNestPiece(CompoundTag tag) {
-            //super(ModPieces.DESERTED_QUMA_NEST_DESPOT_CHAMBER_SP.get(), tag);
-        //}
+        protected StructurePiece generateChild(StructurePieceAccessor pieces, RandomSource random,DesertedQumaNestStructurePieces.DespotsChamber startPiece,
+                BlockPos startingCoord, Direction orientation, int genDepth, boolean isTunnel) {
+            ChamberWeight chosenPiece = CHAMBER_WEIGHTS[random.nextInt(CHAMBER_WEIGHTS.length)];
+            if (isTunnel) {
+                chosenPiece = TUNNEL_WEIGHTS[random.nextInt(TUNNEL_WEIGHTS.length)];
+            }
 
-        protected StructurePiece generateChild(DesertedQumaNestStructurePieces.DespotsChamber startPiece,
-                BlockPos startingCoord, int length, int radius, int depth) {
+            StructurePiece piece = pieceCreationFactory(chosenPiece, pieces, random, startingCoord.getX(), startingCoord.getY(), startingCoord.getZ(), orientation, genDepth);
+            return piece;
 
         }
 
@@ -135,7 +146,8 @@ public class DesertedQumaNestStructurePieces {
         private final int depth;
         private final BlockPos startingCoord;
 
-        public NestTunnel(StructurePieceType type, int genDepth, BoundingBox boundingBox, int radius, int length, BlockPos startingCoord) {
+        public NestTunnel(StructurePieceType type, int genDepth, BoundingBox boundingBox, int radius, int length,
+                BlockPos startingCoord) {
             super(type, genDepth, boundingBox, NestPieceType.TUNNEL);
             this.length = length;
             this.radius = radius;
@@ -148,7 +160,7 @@ public class DesertedQumaNestStructurePieces {
         }
 
         public NestTunnel(CompoundTag tag) {
-            super(ModPieces.DESERTED_QUMA_NEST_TUNNEL_SP.get() ,tag);
+            super(ModPieces.DESERTED_QUMA_NEST_TUNNEL_SP.get(), tag);
             this.length = tag.getInt("Length");
             this.depth = tag.getInt("Depth");
             this.radius = tag.getInt("Radius");
@@ -160,9 +172,11 @@ public class DesertedQumaNestStructurePieces {
             int radius = Mth.ceil(3.0f * Mth.log2(genDepth) * radiusModifier);
             int length = Mth.ceil(3.0f * Mth.log2(genDepth) * lengthModifier);
 
-            BoundingBox boundingBox= BoundingBox.orientBox(x, y, z, x - radius, y - radius, z - radius, x + length + radius, y + radius, z + length + radius, orientation);
-            if(isValidBox(boundingBox)) {
-                return new NestTunnel(ModPieces.DESERTED_QUMA_NEST_TUNNEL_SP.get(), genDepth, boundingBox, radius, length, new BlockPos(x, y, z));
+            BoundingBox boundingBox = BoundingBox.orientBox(x, y, z, x - radius, y - radius, z - radius,
+                    x + length + radius, y + radius, z + length + radius, orientation);
+            if (isValidBox(boundingBox)) {
+                return new NestTunnel(ModPieces.DESERTED_QUMA_NEST_TUNNEL_SP.get(), genDepth, boundingBox, radius,
+                        length, new BlockPos(x, y, z));
             }
             return null;
 
@@ -181,8 +195,7 @@ public class DesertedQumaNestStructurePieces {
         @Override
         public void postProcess(WorldGenLevel level, StructureManager structureManager, ChunkGenerator generator,
                 RandomSource random, BoundingBox box, ChunkPos chunkPos, BlockPos pos) {
-            // TODO Auto-generated method stub
-            throw new UnsupportedOperationException("Unimplemented method 'postProcess'");
+
         }
     }
 
@@ -195,7 +208,8 @@ public class DesertedQumaNestStructurePieces {
         private final Direction orientation;
         private final BlockPos structureCenter;
 
-        public DespotsChamber(BlockPos structureCenter, int structureHeight, int radius, int generationDepth, Direction orientation, BoundingBox bb) {
+        public DespotsChamber(BlockPos structureCenter, int structureHeight, int radius, int generationDepth,
+                Direction orientation, BoundingBox bb) {
             super(ModPieces.DESERTED_QUMA_NEST_DESPOT_CHAMBER_SP.get(), generationDepth, bb, NestPieceType.CHAMBER);
             this.radius = radius;
             this.chamberHeight = structureHeight;
@@ -210,7 +224,7 @@ public class DesertedQumaNestStructurePieces {
         }
 
         public DespotsChamber(CompoundTag tag) {
-            super(ModPieces.DESERTED_QUMA_NEST_DESPOT_CHAMBER_SP.get(),tag);
+            super(ModPieces.DESERTED_QUMA_NEST_DESPOT_CHAMBER_SP.get(), tag);
             this.structureCenter = new BlockPos(tag.getInt("HCX"), tag.getInt("HCY"), tag.getInt("HCZ"));
             this.chamberHeight = tag.getInt("Height");
             this.radius = tag.getInt("Radius");
@@ -218,10 +232,13 @@ public class DesertedQumaNestStructurePieces {
             this.orientation = Direction.byName(tag.getString("Orientation"));
         }
 
-        public StructurePiece startStructure(int x, int y, int z, int structureHeight, int radius, int generationDepth, Direction orientation){
-            BoundingBox bb = BoundingBox.orientBox(x, y, z, x - radius, y - structureHeight, z - radius, x + radius, y + structureHeight, z + radius, orientation);
-            if(isValidBox(bb)) {
-                return new DespotsChamber(new BlockPos(x, y, z), structureHeight, radius, generationDepth, orientation, bb);
+        public static DespotsChamber startStructure(int x, int y, int z, int structureHeight, int radius, int generationDepth,
+                Direction orientation) {
+            BoundingBox bb = BoundingBox.orientBox(x, y, z, x - radius, y - structureHeight, z - radius, x + radius,
+                    y + structureHeight, z + radius, orientation);
+            if (isValidBox(bb)) {
+                return new DespotsChamber(new BlockPos(x, y, z), structureHeight, radius, generationDepth, orientation,
+                        bb);
             }
             return null;
         }
@@ -240,7 +257,6 @@ public class DesertedQumaNestStructurePieces {
         @Override
         public void postProcess(WorldGenLevel level, StructureManager structureManager, ChunkGenerator generator,
                 RandomSource random, BoundingBox box, ChunkPos chunkPos, BlockPos pos) {
-
             int verticalSize = random.nextInt(50, 65);
             BlockPos.MutableBlockPos carve = new BlockPos.MutableBlockPos();
             carve.set(structureCenter);
@@ -270,6 +286,7 @@ public class DesertedQumaNestStructurePieces {
             for (int level = 0; level < levels; ++level) {
                 int corridors = random.nextInt(2, 5);
                 for (int nextCorridor = 0; nextCorridor < corridors; ++nextCorridor) {
+                    generateChild(pieces, random, (DespotsChamber)piece, structureCenter, orientation, generationDepth, false);
 
                 }
             }
